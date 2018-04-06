@@ -10,21 +10,37 @@ function setCart(c) {
 }
 
 function addToCart(item) {
- // write your code here
+var itemObject = {itemName: item, itemPrice: Math.floor(Math.random() * 100)} 
+getCart().push(itemObject)
+return `${itemObject.itemName} has been added to your cart.`
 }
 
 function viewCart() {
-  // write your code here
-}
-
-function total() {
-  // write your code here
+  if (getCart().length===0) {
+    return `Your shopping cart is empty.`
+  }
+  for (let i=0; i<getCart().length; i++) {
+    return `In your cart, you have ${getCart()[i].itemName} at $${getCart()[i].itemPrice}.`
+  }
+}  
+function total(cart) {
+  var sum = 0 
+  for (var i=0; i<getCart().length; i++) {
+    sum = sum + getCart()[i].itemPrice
+  }
+  return sum
 }
 
 function removeFromCart(item) {
-  // write your code here
+  
 }
 
 function placeOrder(cardNumber) {
-  // write your code here
+  if (arguments[0] === undefined) {
+    return `Sorry, we don't have a credit card on file for you.`
+  } else {
+    var sum = total()
+    setCart([])
+    return `Your total cost is $${sum}, which will be charged to the card ${cardNumber}.`
+  }
 }
